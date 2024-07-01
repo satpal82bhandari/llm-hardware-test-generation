@@ -25,7 +25,8 @@ if __name__ == "__main__":
         temperature = 0.0
 
         # model = "gpt-4"
-        model = "gpt-4-0125-preview"
+        # model = "gpt-4-0125-preview"
+        model = "gpt-4o-2024-05-13"
 
         while True:
             cmd = pipe_in.readline()[:-1]

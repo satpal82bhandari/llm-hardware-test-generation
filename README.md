@@ -1,58 +1,142 @@
-# LLM for Hardware Test Generation
-## LAD'24 Paper
-You can learn more in our LAD'24 paper (to be appear).
+## Installation and Setup Instructions
 
-Ruiyang Ma, Yuxin Yang, Ziqian Liu, Jiaxi Zhang, Min Li, Junhua Huang and Guojie Luo*, **VerilogReader: LLM-Aided Hardware Test Generation** in *The First IEEE International Workshop on LLM-Aided Design (LAD'24)*, San Jose, CA, June 2024
+Follow these steps to set up the project on your system.
 
-![overview](./overview.png)
+### Step 1: Update Package Lists
 
-
-## Environment Set Up
-1> Verilator Installation
-
-https://verilator.org/guide/latest/install.html#
+```sh
+sudo apt update
 ```
-# By apt
-sudo apt install verilator
 
-# By Compilation
-git clone https://github.com/verilator/verilator
+- **Description**: Updates the list of available packages and their versions.
+
+### Step 2: Install Required Packages
+
+```sh
+sudo apt install git make autoconf g++ flex bison libcurl4-openssl-dev autoconf help2man iverilog
+```
+
+- **Description**: Installs the necessary packages for building and running Verilator and other dependencies.
+
+### Step 3: Clone the Verilator Repository
+
+```sh
+git clone https://github.com/verilator/verilator.git
+```
+
+- **Description**: Clones the Verilator repository from GitHub.
+
+### Step 4: Navigate to the Verilator Directory
+
+```sh
 cd verilator
+```
+
+- **Description**: Changes the current directory to the Verilator directory.
+
+### Step 5: Checkout the Stable Branch
+
+```sh
+git checkout stable
+```
+
+- **Description**: Switches to the stable branch of the Verilator repository.
+
+### Step 6: Generate Configuration Scripts
+
+```sh
 autoconf
-export VERILATOR_ROOT=`pwd`
+```
+
+- **Description**: Generates the `configure` script needed to build Verilator.
+
+### Step 7: Configure the Build
+
+```sh
 ./configure
-make -j4
 ```
 
-2> Pyverilog Installation
+- **Description**: Configures the build environment for Verilator.
 
-https://github.com/PyHDI/Pyverilog
+### Step 8: Build Verilator
 
-```
-# pre require
-pip3 install jinja2 ply
-
-git clone https://github.com/PyHDI/Pyverilog.git
-cd Pyverilog
-# must to user dir, or error because no root
-python3 setup.py install --user
+```sh
+make
 ```
 
-3> OPENAI User Setup
+- **Description**: Compiles Verilator using 4 parallel jobs to speed up the process.
 
-Our framework use OPENAI GPT as our LLM models, so you need an account for OPENAI key. 
+### Step 9: Install Verilator
+
+```sh
+sudo make install
 ```
-export OPENAI_API_KEY='xxx'
+
+- **Description**: Installs Verilator on your system.
+
+### Step 10: Clone the LLM Hardware Test Generation Project
+
+```sh
+git clone https://github.com/magicYang1573/llm-hardware-test-generation.git
 ```
 
-## Framework overview
-1> Program Entrance `run.py`
-You can set the DUT and the number of experiment trails in that script.
+- **Description**: Clones the LLM Hardware Test Generation project repository from GitHub.
 
-2> Testbench Entrance `src-basic/sim-main.cpp`
-You can choose useing LLM or Random for test generation.
-You can also set up the parameters for these methods.
+### Step 11: Install Python and Virtual Environment
 
-3> LLM Guidance code `/llm-guidance`
+```sh
+sudo apt install python3 python3-venv
+```
 
-4> Random Testing code `/random-guidance`
+- **Description**: Installs Python 3 and the virtual environment package.
+
+### Step 12: Navigate to the Project Directory
+
+```sh
+cd ~/llm-hardware-test-generation
+```
+
+- **Description**: Changes the current directory to the project directory.
+
+### Step 13: Create a Virtual Environment
+
+```sh
+python3 -m venv venv
+```
+
+- **Description**: Creates a virtual environment named `venv`.
+
+### Step 14: Activate the Virtual Environment
+
+```sh
+source venv/bin/activate
+```
+
+- **Description**: Activates the virtual environment.
+
+### Step 15: Upgrade pip
+
+```sh
+pip3 install --upgrade pip
+```
+
+- **Description**: Upgrades pip to the latest version.
+
+### Step 16: Install PyVerilog
+
+```sh
+pip3 install -r requirements.txt
+```
+
+- **Description**: Installs the PyVerilog package.
+
+update run.sh with your openai key
+update export VERILATOR_ROOT="/usr/bin/verilator #Path of your verilator
+
+### Step 17: Run the Project
+
+```sh
+./run.sh
+```
+
+- **Description**: Executes the `run.sh` script to start the project.

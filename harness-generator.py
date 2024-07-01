@@ -9,7 +9,7 @@ import os
 from optparse import OptionParser
 
 # the next line can be removed after installation
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+#sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import pyverilog
 from pyverilog.dataflow.dataflow_analyzer import VerilogDataflowAnalyzer
@@ -27,6 +27,7 @@ def main():
     (options, args) = optparser.parse_args()
 
     filelist = args
+    print(filelist)
 
     for f in filelist:
         if not os.path.exists(f):
